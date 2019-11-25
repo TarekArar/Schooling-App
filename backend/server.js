@@ -6,7 +6,13 @@ const usersRouter = require("./routes/users");
 require("dotenv").config;
 
 const uri = "mongodb+srv://TarekArar:tarek1999@cluster0-iuf3o.mongodb.net/test?retryWrites=true&w=majority";
-mongoose.connect(uri , { useCreateIndex:true, useNewUrlParser: true})
+mongoose
+.connect(uri, {
+useUnifiedTopology: true,
+useNewUrlParser: true,
+useCreateIndex: true
+});
+
 
 const connection = mongoose.connection; 
 
@@ -16,7 +22,8 @@ connection.once('open', () => {
 
 
 const app = express();
-const port =  5000;
+
+const port =  8000;
 
 // Routes
 app.use(cors());
