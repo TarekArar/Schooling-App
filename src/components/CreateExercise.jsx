@@ -23,9 +23,13 @@ export default class CreateExercise extends Component {
     }
 
     componentDidMount(){
-        this.setState({
-            users: ["Tarek Arar","Aymen","Ayoub"],
-            username: "Tarek Arar"
+        axios.get('http://localhost:8000/users/')
+        .then((res) => {
+            const users = res.data;
+            this.setState({
+                users: users.map((user) =>  user.username),
+                username: users[0].username
+            })
         })
     }
 
@@ -67,7 +71,8 @@ export default class CreateExercise extends Component {
         console.log(exercise);
         // Saving exercise to database 
         axios.post('http://localhost:8000/exercises/add', exercise)
-        .then(res => console.log(res.data))
+        .then(res =>console.log(res.data))
+
         // got to home page
         
     }

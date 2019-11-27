@@ -14,7 +14,7 @@ useCreateIndex: true
 });
 
 
-const connection = mongoose.connection; 
+const connection =  mongoose.connection; 
 
 connection.once('open', () => {
     console.log("MongoDB Database connection etablished succesfully");
@@ -28,7 +28,7 @@ const port =  8000;
 // Routes
 app.use(cors());
 app.use(express.json());
-app.use('/exercises', exercisesRouter);
+app.use('/exercises', exercisesRouter); 
 app.use('/users', usersRouter);
 
 // launching server
