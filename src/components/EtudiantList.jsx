@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import Exercise from './Exercise';
 import axios from 'axios'
 
-const ExerciseList = () => {
+const EtudiantList = () => {
     const [exercises, setExercises] = useState([]);
     useEffect(() => {
         axios.get('http://localhost:8000/exercises/')
@@ -19,14 +19,14 @@ const ExerciseList = () => {
 
     return (
          <div>
-             <h3>Logged Exercises</h3>
+             <h3>Liste Etudiants</h3>
              <table className="table">
                  <thead className="thead-light">
                      <tr>
-                         <th>Username</th>
-                         <th>Description</th>
-                         <th>Duration</th>
-                         <th>Date</th>
+                         <th>Nom</th>
+                         <th>Prenom</th>
+                         <th>Matricule</th>
+                         <th>Date Nissance</th>
                          <th>Actions</th>
                      </tr>
                  </thead>
@@ -38,4 +38,4 @@ const ExerciseList = () => {
     );
 }
 
-export default ExerciseList;
+export default EtudiantList;

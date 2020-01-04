@@ -1,5 +1,5 @@
 const router = require('express').Router();
-let Exercise = require('../models/exercise.model');
+let Exercise = require('../models/etudiant.model');
 
 router.route('/').get((req, res) => {
     Exercise.find()
@@ -8,16 +8,16 @@ router.route('/').get((req, res) => {
 })
 
 router.route('/add').post((req, res) => {
-    const username = req.body.username;
-    const description = req.body.description;
-    const duration = Number(req.body.duration);
-    const date = Date.parse(req.body.date);
+    const nom = req.body.nom;
+    const prenom = req.body.prenom;
+    const matricule = Number(req.body.matricule);
+    const dateNissance = Date.parse(req.body.dateNissance);
 
     const newExercise = new Exercise({
-        username,
-        description,
-        duration,
-        date
+        nom,
+        prenom,
+        matricule,
+        dateNissance
     });
 
     newExercise.save()
@@ -40,10 +40,10 @@ router.route('/:id').delete( (req, res) => {
 router.route('/update/:id').post((req, res) => {
     Exercise.findById(req.params.id)
     .then(exercise => {
-        exercise.username = req.body.username;
-        exercise.description = req.body.description;
-        exercise.duration = Number(req.body.duration);
-        exercise.date = Date.parse(req.body.date); 
+        exercise.nom = req.body.nom;
+        exercise.prenom = req.body.prenom;
+        exercise.matricule = Number(req.body.matricule);
+        exercise.dateNissance = Date.parse(req.body.dateNissance); 
 
         exercise.save().
         then(() => res.json("Exercise Updated"))

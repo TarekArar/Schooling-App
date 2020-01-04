@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require('mongoose');
-const exercisesRouter = require("./routes/exercises");
+const exercisesRouter = require("./routes/Etudiant");
 const usersRouter = require("./routes/users");
 require("dotenv").config;
 
-const uri = "mongodb+srv://TarekArar:tarek1999@cluster0-iuf3o.mongodb.net/test?retryWrites=true&w=majority";
+const uri = "mongodb+srv://TarekArar:tarek1999@cluster0-iuf3o.mongodb.net/Schooling?retryWrites=true&w=majority";
 mongoose
 .connect(uri, {
 useUnifiedTopology: true,

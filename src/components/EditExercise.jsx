@@ -14,11 +14,10 @@ export default class EditExercise extends Component {
         this.onSubmit = this.onSubmit.bind(this);
         // state initialization
         this.state = {
-            username:'',
-            description:'',
-            duration:0,
-            date: new Date(),
-            users: []
+            nom:'',
+            prenom:'',
+            matricule:0,
+            dateNissance: new Date(),
         }
     }
 
@@ -26,46 +25,39 @@ export default class EditExercise extends Component {
         axios.get('http://localhost:8000/exercises/'+ this.props.match.params.id)
         .then(res => {
             this.setState({
-                username: res.data.username,
-                description: res.data.description,
-                duration: res.data.duration,
-                date: new Date(res.data.date)
+                nom: res.data.nom,
+                prenom: res.data.prenom,
+                matricule: res.data.matricule,
+                dateNissance: new Date(res.data.dateNissance)
             })
         })
         .catch(err => console.log(err));
 
-        axios.get('http://localhost:8000/users/')
-            .then((res) => {
-            const users = res.data;
-            this.setState({
-                users: users.map((user) => user.username)
-            })
-            })
-            .catch(err => console.log(err))
+       
         
     }
 
     onChangeUsername(e) {
         this.setState({
-            username: e.target.value
+            nom: e.target.value
         });
     }
 
     onChangeDescription(e) {
         this.setState({
-            description: e.target.value
+            prenom: e.target.value
         });
     }
 
     onChangeDuration(e) {
         this.setState({
-            duration: e.target.value
+            matricule: e.target.value
         });
     }
 
-    onChangeDate(date) {
+    onChangeDate(dateNissance) {
         this.setState({
-            date
+            dateNissance
         });
     }
 
@@ -74,10 +66,10 @@ export default class EditExercise extends Component {
         e.preventDefault();
 
         const exercise = {
-            username: this.state.username,
-            description: this.state.description,
-            duration: this.state.duration,
-            date: this.state.date
+            nom: this.state.nom,
+            prenom: this.state.prenom,
+            matricule: this.state.matricule,
+            dateNissance: this.state.dateNissance
         }
 
         console.log(exercise);
@@ -93,45 +85,39 @@ export default class EditExercise extends Component {
             <div>
                 <h3>Update Exercise Log</h3>
                 <form action="" onSubmit={this.onSubmit}>
-                    <div className="form-group">
-                        <label htmlFor="">Username :</label>
-                        <select 
-                        ref="userInput"
-                        required
-                        className="form-control"
-                        value={this.state.username}
-                        onChange={this.onChangeUsername}
-                        >
-                            {this.state.users.map( (user) => {
-                                return(
-                                    <option value={user} key={user}>{user}</option>
-                                )
-                            })}
-                        </select>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="">Description: </label>
+                <div className="form-group">
+                        <label htmlFor="">Nom: </label>
                         <input 
                         type="text"
                         required
                         className="form-control" 
-                        value={this.state.description} 
+                        value={this.state.nom} 
+                        onChange={this.onChangeUsername}/>
+                    </div>
+                 
+                    <div className="form-group">
+                        <label htmlFor="">Prenom: </label>
+                        <input 
+                        type="text"
+                        required
+                        className="form-control" 
+                        value={this.state.prenom} 
                         onChange={this.onChangeDescription}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="">Duration (in minutes): </label>
+                        <label htmlFor="">Matricule: </label>
                         <input 
                         type="text"
                         required
                         className="form-control" 
-                        value={this.state.duration} 
+                        value={this.state.matricule} 
                         onChange={this.onChangeDuration}/>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="">Date: </label>
+                        <label htmlFor="">Date de Nissance: </label>
                         <DatePicker
                         className="form-control"
-                        selected={this.state.date}
+                        selected={this.state.dateNissance}
                         onChange={this.onChangeDate} />
                     </div>
                     <div className="form-group">
